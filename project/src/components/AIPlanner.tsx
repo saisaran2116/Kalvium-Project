@@ -332,7 +332,7 @@ const AIPlanner: React.FC = () => {
 
               {/* Days Accordion */}
               <div className="divide-y divide-gray-200">
-                {generatedPlan.days.map((day, index) => (
+                {generatedPlan.days.map((day) => (
                   <div key={day.day} className="p-6">
                     <button
                       onClick={() => toggleDay(day.day)}
