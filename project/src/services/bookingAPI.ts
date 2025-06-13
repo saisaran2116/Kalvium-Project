@@ -1,6 +1,6 @@
 // src/services/bookingAPI.ts
 
-const BASE_URL = "http://localhost:5000/api/hotels";
+const BASE_URL = "https://kalvium-project.onrender.com/api/hotels";
 
 // Function to search hotels by destination
 export const searchHotels = async (destination: string) => {

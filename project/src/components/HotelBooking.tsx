@@ -47,7 +47,7 @@ const HotelBooking: React.FC = () => {
     try {
       console.log('Starting hotel search for:', destination);
       
-      const response = await fetch(`http://localhost:5000/api/hotels/search?destination=${encodeURIComponent(destination)}`);
+      const response = await fetch(`https://kalvium-project.onrender.com/api/hotels/search?destination=${encodeURIComponent(destination)}`);
       if (!response.ok) {
         throw new Error('Failed to fetch hotels');
       }

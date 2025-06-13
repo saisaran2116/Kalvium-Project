@@ -33,7 +33,7 @@ interface ItineraryPlan {
 }
 
 const generateItinerary = async (prompt: string): Promise<ItineraryPlan> => {
-  const response = await fetch('http://localhost:5000/api/ai/generate-itinerary', {
+  const response = await fetch('https://kalvium-project.onrender.com/api/ai/generate-itinerary', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
