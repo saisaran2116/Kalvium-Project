@@ -5,6 +5,7 @@ import AIPlanner from './components/AIPlanner';
 import HotelBooking from './components/HotelBooking';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
+import DestinationFinder from './components/DestinationFinder';
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
@@ -65,7 +66,7 @@ function App() {
       {activeSection === 'hotels' && <HotelBooking />}
       {activeSection === 'login' && <Login setActiveSection={setActiveSection} />}
       {activeSection === 'signup' && <SignUp setActiveSection={setActiveSection} />}
-      {/* Adventure planner section removed - component was not found */}
+      {activeSection === 'destination-finder' && <DestinationFinder />}
     </div>
   );
 }

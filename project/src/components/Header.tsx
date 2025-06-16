@@ -11,7 +11,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
 
   const navigation = [
     { name: 'Home', id: 'home', icon: MapPin, href: '#hero' },
-    { name: 'Destination Finder', id: 'adventure-planner', icon: Mountain, href: '#adventure-planner' },
+    { name: 'Destination Finder', id: 'destination-finder', icon: Mountain, href: '#destination-finder' },
     { name: 'AI Planner', id: 'ai-planner', icon: Brain, href: '#ai-planner' },
     { name: 'Hotels', id: 'hotels', icon: Hotel, href: '#hotels' },
   ];
