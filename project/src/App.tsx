@@ -1,13 +1,10 @@
 import { useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import TripPlanner from './components/TripPlanner';
 import AIPlanner from './components/AIPlanner';
 import HotelBooking from './components/HotelBooking';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
-import DestinationFinderPage from './components/TripPlanner';
-import DestinationFinder from './components/DestinationFinder';
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
@@ -68,7 +65,7 @@ function App() {
       {activeSection === 'hotels' && <HotelBooking />}
       {activeSection === 'login' && <Login setActiveSection={setActiveSection} />}
       {activeSection === 'signup' && <SignUp setActiveSection={setActiveSection} />}
-      {activeSection === 'adventure-planner' && <DestinationFinderPage />}
+      {/* Adventure planner section removed - component was not found */}
     </div>
   );
 }

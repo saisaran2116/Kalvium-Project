@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, X, MapPin, Brain, Hotel, Compass, User, LogIn, Mountain } from 'lucide-react';
+import { Menu, X, MapPin, Brain, Hotel, User, LogIn, Mountain } from 'lucide-react'; // Compass is unused
 
 interface HeaderProps {
   activeSection: string;

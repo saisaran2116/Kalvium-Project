@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Loader2, TrendingUp, Sparkles } from 'lucide-react';
+import { Loader2, TrendingUp, Sparkles } from 'lucide-react'; // Search is unused
 
 const destinations = [
   { name: 'Goa', img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80', category: 'Beach' },

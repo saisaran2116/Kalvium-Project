@@ -31,36 +31,9 @@ const HotelBooking: React.FC = () => {
     vegetarian: Coffee,
     heritage: Star,
     cultural: Star,
-    common: Hotel,
-    kitchen: Coffee,
-    lockers: Hotel
   };
 
-  const hotelTypes = ['Resort', 'Boutique', 'Budget', 'Hostel'];
-  const amenitiesList = ['Free Wi-Fi', 'Pool', 'Breakfast included', 'Pet-friendly', 'Parking', 'Spa', 'Restaurant'];
-  const guestRatings = ['Excellent', 'Good', 'Fair'];
-  const distances = [5, 10, 20];
-
-  const [showFilters, setShowFilters] = useState(false);
-  const [filters, setFilters] = useState<{
-    location: string;
-    price: number[];
-    stars: number[];
-    hotelTypes: string[];
-    amenities: string[];
-    guestRating: string;
-    distance: number;
-    [key: string]: any;
-  }>({
-    location: '',
-    price: [1000, 10000],
-    stars: [],
-    hotelTypes: [],
-    amenities: [],
-    guestRating: '',
-    distance: 10,
-  });
-
+  // Removed unused variables: hotelTypes, amenitiesList, guestRatings, distances
   const handleSearch = async () => {
     if (!destination.trim()) {
       setError('Please enter a destination');
@@ -92,20 +65,6 @@ const HotelBooking: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleFilterChange = (key: string, value: any) => {
-    setFilters((prev) => ({ ...prev, [key]: value }));
-  };
-
-  const handleChipToggle = (key: string, value: any) => {
-    setFilters((prev) => {
-      const arr = prev[key] as any[];
-      return {
-        ...prev,
-        [key]: arr.includes(value) ? arr.filter((v) => v !== value) : [...arr, value],
-      };
-    });
   };
 
   return (

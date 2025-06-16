@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Calendar, MapPin, Heart, Mountain, Utensils, Users, DollarSign, CheckCircle, Loader2, Sparkles, Hotel, Compass, Star } from 'lucide-react';
+import { Calendar, MapPin, Heart, Mountain, Utensils, CheckCircle, Hotel, Compass, Star, Sparkles } from 'lucide-react'; // Removed unused Users import
 
 const preferences = [
   { label: 'Nature', icon: <Mountain className="h-5 w-5 text-green-500" /> },
@@ -10,11 +10,6 @@ const preferences = [
   { label: 'Culture', icon: <Star className="h-5 w-5 text-amber-500" /> },
 ];
 
-const travelStyles = [
-  { label: 'Solo', icon: <Users className="h-5 w-5 text-sky-500" /> },
-  { label: 'Couple', icon: <Users className="h-5 w-5 text-pink-400" /> },
-  { label: 'Family', icon: <Users className="h-5 w-5 text-emerald-500" /> },
-];
 
 const months = [
   'January', 'February', 'March', 'April', 'May', 'June',
@@ -27,16 +22,9 @@ const TripPlanner: React.FC = () => {
     preferences: [] as string[],
     month: '',
     duration: '',
-    budget: '',
-    travelStyle: '',
-    smartSuggest: {
-      restaurants: true,
-      offbeat: true,
-      budgetHotels: false,
-    },
+
   });
-  const [isLoading, setIsLoading] = useState(false);
-  const [plan, setPlan] = useState<string | null>(null);
+  const [plan] = useState<string | null>(null);
 
   // Stepper navigation
   const nextStep = () => setStep((s) => Math.min(s + 1, 2));
@@ -50,26 +38,6 @@ const TripPlanner: React.FC = () => {
         ? prev.preferences.filter((p) => p !== pref)
         : [...prev.preferences, pref],
     }));
-  };
-
-  const handleSmartToggle = (key: keyof typeof formData.smartSuggest) => {
-    setFormData((prev) => ({
-      ...prev,
-      smartSuggest: {
-        ...prev.smartSuggest,
-        [key]: !prev.smartSuggest[key],
-      },
-    }));
-  };
-
-  // Simulate AI plan generation
-  const handleGenerate = () => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      setPlan('Day 1: Arrive in Jaipur – Stay at Umaid Mahal – Visit Hawa Mahal\nDay 2: Explore Amber Fort & local cuisine...');
-      setStep(4);
-    }, 1800);
   };
 
   return (

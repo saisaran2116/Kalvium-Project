@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Calendar, Heart, MapPin } from 'lucide-react';
+import { Calendar, Heart, MapPin } from 'lucide-react'; // ArrowRight is unused
 
 interface HeroProps {
   setActiveSection: (section: string) => void;
