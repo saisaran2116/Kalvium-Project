@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, X, MapPin, Brain, Hotel, Compass, User, LogIn } from 'lucide-react';
+import { Menu, X, MapPin, Brain, Hotel, Compass, User, LogIn, Mountain } from 'lucide-react';
 
 interface HeaderProps {
   activeSection: string;
@@ -10,31 +10,32 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navigation = [
-    { name: 'Home', id: 'home', icon: MapPin },
-    { name: 'AI Planner', id: 'ai-planner', icon: Brain },
-    { name: 'Hotels', id: 'hotels', icon: Hotel },
-    { name: 'Destinations', id: 'destinations', icon: Compass },
+    { name: 'Home', id: 'home', icon: MapPin, href: '#hero' },
+    { name: 'Destination Finder', id: 'adventure-planner', icon: Mountain, href: '#adventure-planner' },
+    { name: 'AI Planner', id: 'ai-planner', icon: Brain, href: '#ai-planner' },
+    { name: 'Hotels', id: 'hotels', icon: Hotel, href: '#hotels' },
   ];
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-orange-100 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-2 sm:px-4 lg:px-6">
         <div className="flex justify-between items-center h-16">
-          <div className="flex items-center">
+          <div className="flex items-center ml-2 md:ml-4">
             <h1 className="text-3xl font-['Playfair_Display'] text-slate-800 tracking-wide">
               Trip Sculptor
             </h1>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center gap-10">
             {navigation.map((item) => {
               const IconComponent = item.icon;
               return (
-                <button
+                <a
                   key={item.id}
+                  href={item.href}
                   onClick={() => setActiveSection(item.id)}
-                  className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-200 ${
+                  className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 ${
                     activeSection === item.id
                       ? 'bg-orange-100 text-orange-700'
                       : 'text-gray-600 hover:text-orange-600 hover:bg-orange-50'
@@ -42,9 +43,13 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
                 >
                   <IconComponent className="h-4 w-4" />
                   <span className="font-medium">{item.name}</span>
-                </button>
+                </a>
               );
             })}
+            
+            <button className="ml-4 p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition" title="Toggle dark mode">
+              <span className="text-xl">��</span>
+            </button>
             
             {/* Auth Buttons */}
             <div className="flex items-center space-x-3 ml-4">
@@ -76,13 +81,14 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-orange-100">
+          <div className="md:hidden py-4 border-t border-orange-100 bg-white/95">
             <nav className="space-y-2">
               {navigation.map((item) => {
                 const IconComponent = item.icon;
                 return (
-                  <button
+                  <a
                     key={item.id}
+                    href={item.href}
                     onClick={() => {
                       setActiveSection(item.id);
                       setIsMenuOpen(false);
@@ -95,7 +101,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
                   >
                     <IconComponent className="h-5 w-5" />
                     <span className="font-medium">{item.name}</span>
-                  </button>
+                  </a>
                 );
               })}
               

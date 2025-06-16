@@ -7,34 +7,24 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ setActiveSection }) => {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-orange-600 via-orange-500 to-teal-600">
+    <section className="relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #FFA726 0%, #FFA726 60%, #009688 100%)' }}>
+      {/* Soft travel-themed background illustration */}
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80" alt="Travel background" className="absolute inset-0 w-full h-full object-cover opacity-20 blur-sm pointer-events-none select-none" loading="lazy" />
       <div className="absolute inset-0 bg-black/20"></div>
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
         <div className="text-center">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-            Discover India's
-            <span className="block bg-gradient-to-r from-yellow-300 to-yellow-100 bg-clip-text text-transparent">
-              Hidden Gems
-            </span>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-lg">
+            Plan Your Dream Trip Instantly
           </h1>
-          <p className="text-xl md:text-2xl text-orange-100 mb-8 max-w-3xl mx-auto leading-relaxed">
-            AI-powered travel planning for devotional pilgrimages and leisure getaways. 
-            Find perfect destinations based on season and your unique interests.
+          <p className="text-lg md:text-2xl text-orange-100 mb-10 max-w-2xl mx-auto leading-relaxed drop-shadow">
+            AI-powered travel planning for smarter, faster bookings. Discover, customize, and book your next adventure in minutes.
           </p>
-          
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <button
               onClick={() => setActiveSection('ai-planner')}
-              className="bg-white text-orange-600 hover:bg-orange-50 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
+              className="px-8 py-3 rounded-full text-lg md:text-xl font-semibold bg-gradient-to-r from-orange-500 to-teal-600 text-white shadow-lg hover:scale-105 hover:shadow-xl transition-transform duration-200"
             >
-              <span>Start Planning</span>
-              <ArrowRight className="h-5 w-5" />
-            </button>
-            <button
-              onClick={() => setActiveSection('destinations')}
-              className="border-2 border-white text-white hover:bg-white hover:text-orange-600 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 flex items-center justify-center space-x-2"
-            >
-              <span>Explore Destinations</span>
+              Start Planning
             </button>
           </div>
 

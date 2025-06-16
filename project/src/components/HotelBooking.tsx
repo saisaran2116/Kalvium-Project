@@ -36,6 +36,31 @@ const HotelBooking: React.FC = () => {
     lockers: Hotel
   };
 
+  const hotelTypes = ['Resort', 'Boutique', 'Budget', 'Hostel'];
+  const amenitiesList = ['Free Wi-Fi', 'Pool', 'Breakfast included', 'Pet-friendly', 'Parking', 'Spa', 'Restaurant'];
+  const guestRatings = ['Excellent', 'Good', 'Fair'];
+  const distances = [5, 10, 20];
+
+  const [showFilters, setShowFilters] = useState(false);
+  const [filters, setFilters] = useState<{
+    location: string;
+    price: number[];
+    stars: number[];
+    hotelTypes: string[];
+    amenities: string[];
+    guestRating: string;
+    distance: number;
+    [key: string]: any;
+  }>({
+    location: '',
+    price: [1000, 10000],
+    stars: [],
+    hotelTypes: [],
+    amenities: [],
+    guestRating: '',
+    distance: 10,
+  });
+
   const handleSearch = async () => {
     if (!destination.trim()) {
       setError('Please enter a destination');
@@ -67,6 +92,20 @@ const HotelBooking: React.FC = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleFilterChange = (key: string, value: any) => {
+    setFilters((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const handleChipToggle = (key: string, value: any) => {
+    setFilters((prev) => {
+      const arr = prev[key] as any[];
+      return {
+        ...prev,
+        [key]: arr.includes(value) ? arr.filter((v) => v !== value) : [...arr, value],
+      };
+    });
   };
 
   return (
@@ -140,76 +179,79 @@ const HotelBooking: React.FC = () => {
           </div>
         )}
 
-        {/* Hotels Grid */}
-        {!loading && hotels.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {hotels.map((hotel) => (
-              <div
-                key={hotel.id}
-                className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group"
-              >
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={hotel.image}
-                    alt={hotel.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                    {hotel.deal}
-                  </div>
-                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center space-x-1">
-                    <Star className="h-4 w-4 text-yellow-500 fill-current" />
-                    <span className="text-sm font-semibold text-gray-800">{hotel.rating}</span>
-                  </div>
-                </div>
-
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">{hotel.name}</h3>
-                  <p className="text-gray-600 text-sm mb-4 flex items-center">
-                    <MapPin className="h-4 w-4 mr-1" />
-                    {hotel.location}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {hotel.amenities.map((amenity) => {
-                      const IconComponent = amenityIcons[amenity as keyof typeof amenityIcons];
-                      return (
-                        <div key={amenity} className="flex items-center space-x-1 bg-gray-100 px-2 py-1 rounded-full text-xs">
-                          <IconComponent className="h-3 w-3 text-gray-600" />
-                          <span className="text-gray-600 capitalize">{amenity}</span>
-                        </div>
-                      );
-                    })}
-                  </div>
-
-                  <div className="flex items-center justify-between mb-4">
-                    <div>
-                      <span className="text-2xl font-bold text-gray-900">₹{hotel.price.toLocaleString()}</span>
-                      <span className="text-sm text-gray-500 line-through ml-2">₹{hotel.originalPrice.toLocaleString()}</span>
-                      <p className="text-xs text-gray-500">per night</p>
+        {/* Main Content (Hotels Grid) */}
+        <div>
+          {/* Hotels Grid */}
+          {!loading && hotels.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {hotels.map((hotel) => (
+                <div
+                  key={hotel.id}
+                  className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group"
+                >
+                  <div className="relative h-48 overflow-hidden">
+                    <img
+                      src={hotel.image}
+                      alt={hotel.name}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                      {hotel.deal}
                     </div>
-                    <div className="text-right">
-                      <div className="text-sm font-semibold text-green-600">
-                        Save ₹{(hotel.originalPrice - hotel.price).toLocaleString()}
+                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center space-x-1">
+                      <Star className="h-4 w-4 text-yellow-500 fill-current" />
+                      <span className="text-sm font-semibold text-gray-800">{hotel.rating}</span>
+                    </div>
+                  </div>
+
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-1">{hotel.name}</h3>
+                    <p className="text-gray-600 text-sm mb-4 flex items-center">
+                      <MapPin className="h-4 w-4 mr-1" />
+                      {hotel.location}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {hotel.amenities.map((amenity) => {
+                        const IconComponent = amenityIcons[amenity as keyof typeof amenityIcons];
+                        return (
+                          <div key={amenity} className="flex items-center space-x-1 bg-gray-100 px-2 py-1 rounded-full text-xs">
+                            <IconComponent className="h-3 w-3 text-gray-600" />
+                            <span className="text-gray-600 capitalize">{amenity}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    <div className="flex items-center justify-between mb-4">
+                      <div>
+                        <span className="text-2xl font-bold text-gray-900">₹{hotel.price.toLocaleString()}</span>
+                        <span className="text-sm text-gray-500 line-through ml-2">₹{hotel.originalPrice.toLocaleString()}</span>
+                        <p className="text-xs text-gray-500">per night</p>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-sm font-semibold text-green-600">
+                          Save ₹{(hotel.originalPrice - hotel.price).toLocaleString()}
+                        </div>
                       </div>
                     </div>
+
+                    <button className="w-full bg-gradient-to-r from-blue-500 to-teal-600 text-white py-3 px-4 rounded-xl font-semibold hover:from-blue-600 hover:to-teal-700 transition-all duration-300">
+                      View Details
+                    </button>
                   </div>
-
-                  <button className="w-full bg-gradient-to-r from-blue-500 to-teal-600 text-white py-3 px-4 rounded-xl font-semibold hover:from-blue-600 hover:to-teal-700 transition-all duration-300">
-                    View Details
-                  </button>
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
 
-        {/* No Results State */}
-        {!loading && hotels.length === 0 && destination && (
-          <div className="text-center py-8">
-            <p className="text-gray-600">No hotels found for "{destination}". Try a different destination.</p>
-          </div>
-        )}
+          {/* No Results State */}
+          {!loading && hotels.length === 0 && destination && (
+            <div className="text-center py-8">
+              <p className="text-gray-600">No hotels found for "{destination}". Try a different destination.</p>
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

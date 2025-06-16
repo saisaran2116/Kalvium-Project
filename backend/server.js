@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import hotelRoutes from './routes/hotels.js';
 import mapsRouter from './routes/maps.js';
 import aiRoutes from './routes/ai.js';
+import destinationRoutes from './routes/destinationRoutes.js';
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use('/api/hotels', hotelRoutes);
 app.use('/api/maps', mapsRouter);
 app.use('/api/ai', aiRoutes);
+app.use('/api/destinations', destinationRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
