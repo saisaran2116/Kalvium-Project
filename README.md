@@ -1,6 +1,6 @@
 # TripSculptor - AI-Powered Indian Travel Planning
 
-TripSculptor is a modern travel planning platform that helps users discover and plan their perfect Indian adventure. Using AI-powered recommendations, it creates personalized itineraries based on interests, season, and budget.
+TripSculptor is a modern travel planning platform that helps users discover and plan their perfect Indian adventure. Using AI-powered recommendations, it creates personalized itineraries based on interests, season, and budgets.
 
 ## Features
 
