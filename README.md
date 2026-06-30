@@ -4,7 +4,7 @@ TripSculptor is a modern travel planning platform that helps users discover and 
 
 ## Features
 
-- AI-powered trip planning
+- AI-powered trip planningss
 - Hotel booking integration
 - Interactive destination discovery
 - Personalized itinerary generation
